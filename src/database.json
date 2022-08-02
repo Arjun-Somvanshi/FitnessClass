@@ -11,10 +11,16 @@
       "time": "16:00:00"
     }
   ],
-  "waiting_list": [],
+  "waiting_list": [
+    {
+      "class": "yoga",
+      "user": "asdfasdfasdf",
+      "time": "16:00:00"
+    }
+  ],
   "capacity": {
     "gym": 50,
-    "yoga": 48,
+    "yoga": -1,
     "dance": 50
   }
 }

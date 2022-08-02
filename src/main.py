@@ -38,13 +38,15 @@ class MainScreen(MDScreen):
                 self.add_class("gym")
 
     def add_class(self, classname):
-            if self.data["capacity"][classname] >= 0:
-                self.data["classes"].append({"class": classname, "user": self.ids.username.text, "time": str(self.time_dialog.time)})
-                self.data["capacity"][classname] -= 1
-            else:
-                self.data["waiting_list"].append({"class": classname, "user": self.ids.username.text, "time": str(self.time_dialog.time)})
-            with open("database.json", "w") as f:
-                json.dump(self.data, f, indent=2)
+        if self.time_dialog.time == None:
+            self.time_dialog.time = "00:00:00"
+        if self.data["capacity"][classname] > 0:
+            self.data["classes"].append({"class": classname, "user": self.ids.username.text, "time": str(self.time_dialog.time)})
+            self.data["capacity"][classname] -= 1
+        else:
+            self.data["waiting_list"].append({"class": classname, "user": self.ids.username.text, "time": str(self.time_dialog.time)})
+        with open("database.json", "w") as f:
+            json.dump(self.data, f, indent=2)
 
     def show_time_picker(self):
         self.time_dialog = MDTimePicker()
@@ -53,9 +55,9 @@ class MainScreen(MDScreen):
 
     def get_time(self, instance, time):
         return time
+
     def cancel_class(self):
         classname = ""
-        print(self.time_dialog.time)
         if self.ids.yoga.active:
             classname = "yoga"
         elif self.ids.dance.active:
@@ -64,10 +66,14 @@ class MainScreen(MDScreen):
             classname = "dance"
         with open("database.json", "r") as f:
             self.data = json.load(f) 
+        entity = {"class":classname, "time":str(self.time_dialog.time), "user": self.ids.username.text}
+        print(entity)
         try:
-            self.data["classes"].remove({"class":classname, "time":str(self.time_dialog.time), "username": self.username.text})
+            self.data["classes"].remove(entity)
         except:
             print("Entry does not exist")
+        with open("database.json", "w") as f:
+            json.dump(self.data, f, indent=2)
 
 
 
