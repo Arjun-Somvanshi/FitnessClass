@@ -68,10 +68,22 @@ class MainScreen(MDScreen):
             self.data = json.load(f) 
         entity = {"class":classname, "time":str(self.time_dialog.time), "user": self.ids.username.text}
         print(entity)
+        cancelled = False
         try:
             self.data["classes"].remove(entity)
+            cancelled = True
         except:
+            cancelled = False
             print("Entry does not exist")
+
+        if cancelled:
+            self.data["capacity"][classname] += 1
+            print(self.data["capacity"])
+            if len(self.data["waiting_list"]) > 0:
+                entity = self.data["waiting_list"].pop(0)
+                self.data["classes"].append(entity)
+            else:
+                self.data["capacity"][classname] += 1
         with open("database.json", "w") as f:
             json.dump(self.data, f, indent=2)
 

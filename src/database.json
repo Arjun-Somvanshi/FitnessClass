@@ -2,25 +2,19 @@
   "classes": [
     {
       "class": "yoga",
-      "user": "asdfasdf",
-      "time": "05:00:00"
+      "user": "asdfasdfasdf",
+      "time": "16:00:00"
     },
     {
       "class": "yoga",
-      "user": "asdfasdfasdf",
-      "time": "16:00:00"
+      "user": "asdfasdf",
+      "time": "01:00:00"
     }
   ],
-  "waiting_list": [
-    {
-      "class": "yoga",
-      "user": "asdfasdfasdf",
-      "time": "16:00:00"
-    }
-  ],
+  "waiting_list": [],
   "capacity": {
     "gym": 50,
-    "yoga": -1,
+    "yoga": 1,
     "dance": 50
   }
 }
