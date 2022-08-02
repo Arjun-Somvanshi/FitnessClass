@@ -1,13 +1,12 @@
 BoxLayout:
     orientation: "vertical"
     MDToolbar:
-        title: "Navigation Drawer"
+        title: "Fitness App"
         elevation: 10
         left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
     MDNavigationLayout:
         ScreenManager:
             MainScreen:
-            SecondScreen:
         MDNavigationDrawer:
             id: nav_drawer
             ContentNavigationDrawer:
@@ -15,8 +14,85 @@ BoxLayout:
 
 <MainScreen>:
     name: "main"
-<SecondScreen>:
-    name: "second"
+    BoxLayout:
+        orientation: "vertical"
+        padding: dp(20)
+        spacing: dp(40)
+        BoxLayout:
+            size_hint_y: None
+            height: self.minimum_height
+            Widget:
+            MDLabel:
+                text: "Choose a Fitness Class to Join"
+                halign: "center"
+                size_hint_y: None
+                height: self.texture_size[1]
+                width: dp(400)
+                font_size: sp(25)
+            Widget:
+        MDTextField:
+            id: username
+            hint_text: "Username"
+            size_hint_x: None
+            width: self.parent.width/2
+            pos_hint: {"center_x": 0.5}
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_x: None
+            width: self.minimum_width
+            pos_hint: {"center_x": 0.5}
+            BoxLayout:
+                MDCheckbox:
+                    id: yoga
+                    size_hint: None, None
+                    size: "48dp", "48dp"
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    group: "class"
+                MDLabel:
+                    text: "Yoga"
+                    size_hint_x: None
+                    width: dp(100)
+            BoxLayout:
+                MDCheckbox:
+                    id: gym
+                    size_hint: None, None
+                    size: "48dp", "48dp"
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    group: "class"
+                MDLabel:
+                    text: "Gym"
+                    size_hint_x: None
+                    width: dp(100)
+            BoxLayout:
+                MDCheckbox:
+                    id: dance 
+                    size_hint: None, None
+                    group: "class"
+                    size: "48dp", "48dp"
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                MDLabel:
+                    text: "Dance"
+                    size_hint_x: None
+                    width: dp(100)
+            Widget:
+                size_hint_y: None
+                height: dp(50)
+            MDRaisedButton:
+                text: "Pick A Time"
+                on_release: root.show_time_picker()
+            BoxLayout:
+                spacing: dp(15)
+                size_hint_x: None
+                width: self.minimum_width
+                MDRaisedButton:
+                    text: "Submit"
+                    on_release: root.save_class()
+                MDRaisedButton:
+                    text: "Cancel"
+                    on_release: root.cancel_class()
+            
+        Widget:
+
 
 <ItemDrawer>:
     theme_text_color: "Custom"
@@ -51,7 +127,7 @@ BoxLayout:
         height: self.texture_size[1]
 
     MDLabel:
-        text: "kivydevelopment@gmail.com"
+        text: "arjunsomvanshi@gmail.com"
         font_style: "Caption"
         size_hint_y: None
         height: self.texture_size[1]
